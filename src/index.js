@@ -4,9 +4,7 @@ const app = express();
 
 const prepareAndStartServer = () => {
   app.listen(PORT, () => {
-    console.log(
-      `Authentication Server Up and Running at http://localhost:${PORT}/ ✈️`
-    );
+    console.log(`Authentication Server is Up at http://localhost:${PORT}/ ✈️`);
   });
 };
 
