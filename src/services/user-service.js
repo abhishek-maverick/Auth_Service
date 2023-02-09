@@ -24,8 +24,7 @@ class UserService {
 
       const user = await this.userRepository.getByEmail(email);
       //step 2 -> compare incoming plain password with stored encrypted password
-
-      const passwordMatch = this.checkPassword(plainPassword, user.password);
+      const passwordMatch = this.checkPassword(plainPassword, user?.password);
 
       if (!passwordMatch) {
         console.log("Password doesn't match");
