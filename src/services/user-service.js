@@ -18,6 +18,30 @@ class UserService {
     }
   }
 
+  async signIn(email, plainPassword) {
+    try {
+      //step 1 -> fetch the user using the email
+
+      const user = await this.userRepository.getByEmail(email);
+      //step 2 -> compare incoming plain password with stored encrypted password
+
+      const passwordMatch = this.checkPassword(plainPassword, user.password);
+
+      if (!passwordMatch) {
+        console.log("Password doesn't match");
+        throw { error: "Incorrect Password" };
+      }
+
+      // when password match -> create a token
+
+      const newJWT = this.createToken({ email: user.email, id: user.id });
+      return newJWT;
+    } catch (error) {
+      console.log("Something went wrong in service layer while signing in !!!");
+      throw { error };
+    }
+  }
+
   async destroy(userId) {
     try {
       const user = this.userRepository.destroy(userId);
