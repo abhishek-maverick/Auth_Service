@@ -56,7 +56,7 @@ class UserService {
       return user.id;
     } catch (error) {
       console.log(
-        "Something went wrong in service layer while authenticated check !!!"
+        "Something went wrong in service layer while authention check !!!"
       );
       throw { error };
     }
