@@ -1,3 +1,4 @@
+const { request } = require("express");
 const UserService = require("../services/user-service");
 
 const userService = new UserService();
@@ -115,10 +116,30 @@ const isAuthenticated = async (req, res) => {
   }
 };
 
+const isAdmin = async (req, res) => {
+  try {
+    const response = await userService.isAdmin(req.body.userId);
+    return res.status(200).json({
+      data: response,
+      success: true,
+      err: {},
+      message: "Successfully fetched whether user is admin or not",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Unable to fetch whether user is admin or not",
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   create,
   destroy,
   getById,
   signIn,
   isAuthenticated,
+  isAdmin,
 };
