@@ -1,4 +1,3 @@
-const { request } = require("express");
 const UserService = require("../services/user-service");
 
 const userService = new UserService();
